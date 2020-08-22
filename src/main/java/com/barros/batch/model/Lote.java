@@ -1,45 +1,60 @@
 package com.barros.batch.model;
 
+import com.barros.batch.reader.Line;
+import lombok.Getter;
+import lombok.NonNull;
+
+import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 public class Lote {
-
     private String nomeDoArquivo;
 
-    private List<Vendedor> vendedores;
-    private List<Cliente> clientes;
-    private List<Venda> vendas;
+    private final List<Vendedor> vendedores;
+    private final List<Cliente> clientes;
+    private final List<Venda> vendas;
 
     public Lote() {
+        vendedores = new ArrayList<>();
+        clientes = new ArrayList<>();
+        vendas = new ArrayList<>();
     }
 
     public Lote(String nomeDoArquivo) {
-
         this.nomeDoArquivo = nomeDoArquivo;
+
+        vendedores = new ArrayList<>();
+        clientes = new ArrayList<>();
+        vendas = new ArrayList<>();
     }
 
-    public List<Vendedor> getVendedores() {
-        return vendedores;
+    private void addVendedor(Vendedor vendedor) {
+        this.vendedores.add(vendedor);
     }
 
-    public void setVendedores(List<Vendedor> vendedores) {
-        this.vendedores = vendedores;
+    private void addCliente(Cliente cliente) {
+        this.clientes.add(cliente);
     }
 
-    public List<Cliente> getClientes() {
-        return clientes;
+    private void addVenda(Venda venda) {
+        this.vendas.add(venda);
     }
 
-    public void setClientes(List<Cliente> clientes) {
-        this.clientes = clientes;
-    }
-
-    public List<Venda> getVendas() {
-        return vendas;
-    }
-
-    public void setVendas(List<Venda> vendas) {
-        this.vendas = vendas;
+    public void addDadoByFormato(@NonNull Line line) {
+        switch (line.getFormatoId()) {
+            case Vendedor.FORMATO_ID:
+                this.addVendedor(Vendedor.ofLine(line));
+                break;
+            case Cliente.FORMATO_ID:
+                this.addCliente(Cliente.ofLine(line));
+                break;
+            case Venda.FORMATO_ID:
+                this.addVenda(Venda.ofLine(line));
+                break;
+            default:
+                break;
+        }
     }
 
     @Override

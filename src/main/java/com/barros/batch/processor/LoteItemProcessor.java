@@ -8,13 +8,13 @@ import org.springframework.batch.item.ItemProcessor;
 
 public class LoteItemProcessor implements ItemProcessor<Lote, Lote> {
 
-	private static final Logger log = LoggerFactory.getLogger(LoteItemProcessor.class);
+	private final Logger logger = LoggerFactory.getLogger(LoteItemProcessor.class);
 
 	@Override
-	public Lote process(final Lote lote) throws Exception {
+	public Lote process(final Lote lote) {
 		final Lote loteProcessado = new Lote();
 
-		log.info("Converting (" + lote + ") into (" + loteProcessado + ")");
+		logger.info("Converting (" + lote + ") into (" + loteProcessado + ")");
 
 		return loteProcessado;
 	}

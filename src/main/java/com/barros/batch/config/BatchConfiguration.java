@@ -4,6 +4,8 @@ import com.barros.batch.model.Lote;
 import com.barros.batch.processor.LoteItemProcessor;
 import com.barros.batch.reader.FileReader;
 import com.barros.batch.writer.ConsoleItemWriter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -21,15 +23,16 @@ import org.springframework.context.annotation.Configuration;
 @EnableBatchProcessing
 public class BatchConfiguration {
 
+	private final Logger logger = LoggerFactory.getLogger(BatchConfiguration.class);
+
 	@Value("${input.folder}")
 	private String inputFolder;
 
 	@Value("${output.folder}")
 	private String outputFolder;
 
-	public JobBuilderFactory jobBuilderFactory;
-
-	public StepBuilderFactory stepBuilderFactory;
+	private JobBuilderFactory jobBuilderFactory;
+	private StepBuilderFactory stepBuilderFactory;
 
 	@Autowired
 	public BatchConfiguration(JobBuilderFactory jobBuilderFactory, StepBuilderFactory stepBuilderFactory) {
@@ -39,6 +42,7 @@ public class BatchConfiguration {
 
 	@Bean
 	public ItemReader<Lote> reader()  {
+		logger.info("Reading Folder: {0}", inputFolder);
 		return new FileReader(inputFolder);
 	}
 
@@ -49,18 +53,17 @@ public class BatchConfiguration {
 
 	@Bean
 	public ItemWriter<Lote> itemWriter() {
-		System.out.println(outputFolder);
+		logger.info("Writing Folder: {0}", outputFolder);
 		return new ConsoleItemWriter();
 	}
 
 	@Bean
-	public Job job(JobCompletionNotificationListener listener, Step step1) {
+	public Job job(Step step1) {
 		return jobBuilderFactory.get("job")
-			.incrementer(new RunIdIncrementer())
-			.listener(listener)
-			.flow(step1)
-			.end()
-			.build();
+				.incrementer(new RunIdIncrementer())
+				.flow(step1)
+				.end()
+				.build();
 	}
 
 	@Bean
