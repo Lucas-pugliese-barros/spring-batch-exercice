@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+//TODO testes de relatorio se estao nesse arquivo
 public class LoteProcessorTest {
 
     private LoteProcessor loteProcessor;

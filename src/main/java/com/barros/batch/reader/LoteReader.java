@@ -17,7 +17,7 @@ import java.util.Scanner;
 public class LoteReader implements ItemReader<Lote> {
 
     private final Logger logger = LoggerFactory.getLogger(LoteReader.class);
-    private final String FILE_EXTENSION = ".dat";
+    private static final String FILE_EXTENSION = ".dat";
 
     private String inputFolder;
     private List<File> listOfFiles;

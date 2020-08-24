@@ -1,23 +1,34 @@
 package com.barros.batch.unit;
 
+import com.barros.batch.config.BatchConfiguration;
 import com.barros.batch.model.*;
 import com.barros.batch.reader.LoteReader;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.test.context.ConfigFileApplicationContextInitializer;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.util.ResourceUtils;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LoteReaderTest {
+public class LoteReaderTest extends Unit {
 
     private LoteReader loteReader;
 
     @Before
     public void beforeTheTest() {
-        String inputFolder = "/home/lucas.pugliese.barros/NewJob/DBC/agibank-batch/batch/src/test/resources/input";
         loteReader = new LoteReader(inputFolder);
     }
 

@@ -8,10 +8,13 @@ import com.barros.batch.writer.ReportWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.Job;
+import org.springframework.batch.core.JobParameters;
+import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
@@ -19,9 +22,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 
 @Configuration
 @EnableBatchProcessing
+@EnableScheduling
 public class BatchConfiguration {
 
 	private final Logger logger = LoggerFactory.getLogger(BatchConfiguration.class);
@@ -34,12 +40,24 @@ public class BatchConfiguration {
 
 	private JobBuilderFactory jobBuilderFactory;
 	private StepBuilderFactory stepBuilderFactory;
+	private JobLauncher jobLauncher;
 
 	@Autowired
 	public BatchConfiguration(JobBuilderFactory jobBuilderFactory,
-							  StepBuilderFactory stepBuilderFactory) {
+							  StepBuilderFactory stepBuilderFactory,
+							  JobLauncher jobLauncher) {
+
 		this.jobBuilderFactory = jobBuilderFactory;
 		this.stepBuilderFactory = stepBuilderFactory;
+		this.jobLauncher = jobLauncher;
+	}
+
+	@Scheduled(cron = "0 */1 * * * ?")
+	public void perform() throws Exception {
+		JobParameters params = new JobParametersBuilder()
+				.addString("JobID", String.valueOf(System.currentTimeMillis()))
+				.toJobParameters();
+		jobLauncher.run(job(), params);
 	}
 
 	@Bean
@@ -58,18 +76,18 @@ public class BatchConfiguration {
 	}
 
 	@Bean
-	public Job job(Step step1) {
+	public Job job() {
 		return jobBuilderFactory.get("job")
 				.incrementer(new RunIdIncrementer())
-				.flow(step1)
+				.flow(step())
 				.end()
 				.build();
 	}
 
 	@Bean
-	public Step step1(ItemWriter<Relatorio> writer) {
+	public Step step() {
 		return stepBuilderFactory.get("step1")
-			.<Lote, Relatorio> chunk(10)
+			.<Lote, Relatorio> chunk(1)
 			.reader(reader())
 			.processor(processor())
 			.writer(itemWriter())
