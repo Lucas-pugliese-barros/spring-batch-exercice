@@ -43,4 +43,8 @@ public class Item {
                 .map(Item::ofItemString)
                 .collect(Collectors.toList());
     }
+
+    public BigDecimal getValorDeTodosOsItens() {
+        return preco.multiply(new BigDecimal(quantidade));
+    }
 }

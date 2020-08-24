@@ -3,6 +3,7 @@ package com.barros.batch.model;
 import com.barros.batch.reader.Line;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @NoArgsConstructor
@@ -27,5 +28,11 @@ public class Venda {
         String nomeDoVendedor = line.getData(NOME_DO_VENDEDOR_INDEX);
 
         return new Venda(id, itens, nomeDoVendedor);
+    }
+
+    public BigDecimal getValorTotal() {
+        return itens.stream()
+                .map(Item::getValorDeTodosOsItens)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 }

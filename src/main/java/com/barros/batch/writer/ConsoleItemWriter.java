@@ -1,6 +1,5 @@
 package com.barros.batch.writer;
 
-import com.barros.batch.reader.FileReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.ItemWriter;

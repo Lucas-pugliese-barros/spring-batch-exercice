@@ -22,7 +22,7 @@ public class FileReaderTest {
     }
 
     @Test
-    public void givenInputFolderTheFileReaderShouldReturnValidVendedores() {
+    public void givenValidInputFolderTheReaderShouldReturnValidVendedores() {
         String fileName = "lote_um.dat";
 
         List<Vendedor> vendedoresEsperados = new ArrayList<>() {{
@@ -37,7 +37,7 @@ public class FileReaderTest {
     }
 
     @Test
-    public void givenInputFolderTheFileReaderShouldReturnValidClientes() {
+    public void givenValidInputFolderTheReaderShouldReturnValidClientes() {
         String fileName = "lote_um.dat";
 
         List<Cliente> clientesEsperados = new ArrayList<>() {{
@@ -52,7 +52,7 @@ public class FileReaderTest {
     }
 
     @Test
-    public void givenInputFolderTheFileReaderShouldReturnValidVenda() {
+    public void givenValidInputFolderTheReaderShouldReturnValidVenda() {
         String fileName = "lote_um.dat";
 
         List<Item> itensOfVendaPedro = new ArrayList<>() {{

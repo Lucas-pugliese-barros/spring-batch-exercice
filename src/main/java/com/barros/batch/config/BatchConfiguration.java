@@ -1,7 +1,8 @@
 package com.barros.batch.config;
 
 import com.barros.batch.model.Lote;
-import com.barros.batch.processor.LoteItemProcessor;
+import com.barros.batch.model.Relatorio;
+import com.barros.batch.processor.LoteProcessor;
 import com.barros.batch.reader.FileReader;
 import com.barros.batch.writer.ConsoleItemWriter;
 import org.slf4j.Logger;
@@ -47,12 +48,12 @@ public class BatchConfiguration {
 	}
 
 	@Bean
-	public LoteItemProcessor processor() {
-		return new LoteItemProcessor();
+	public LoteProcessor processor() {
+		return new LoteProcessor();
 	}
 
 	@Bean
-	public ItemWriter<Lote> itemWriter() {
+	public ItemWriter<Relatorio> itemWriter() {
 		logger.info("Writing Folder: {0}", outputFolder);
 		return new ConsoleItemWriter();
 	}
@@ -67,11 +68,11 @@ public class BatchConfiguration {
 	}
 
 	@Bean
-	public Step step1(ItemWriter<Lote> writer) {
+	public Step step1(ItemWriter<Relatorio> writer) {
 		return stepBuilderFactory.get("step1")
-			.<Lote, Lote> chunk(10)
+			.<Lote, Relatorio> chunk(10)
 			.reader(reader())
-			//.processor(processor())
+			.processor(processor())
 			.writer(itemWriter())
 			.build();
 	}
