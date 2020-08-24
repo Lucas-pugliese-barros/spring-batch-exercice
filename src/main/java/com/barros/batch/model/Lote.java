@@ -29,28 +29,16 @@ public class Lote {
         vendas = new ArrayList<>();
     }
 
-    private void addVendedor(Vendedor vendedor) {
-        this.vendedores.add(vendedor);
-    }
-
-    private void addCliente(Cliente cliente) {
-        this.clientes.add(cliente);
-    }
-
-    private void addVenda(Venda venda) {
-        this.vendas.add(venda);
-    }
-
     public void addDadoByFormato(@NonNull Line line) {
         switch (line.getFormatoId()) {
             case Vendedor.FORMATO_ID:
-                this.addVendedor(Vendedor.ofLine(line));
+                this.vendedores.add(Vendedor.ofLine(line));
                 break;
             case Cliente.FORMATO_ID:
-                this.addCliente(Cliente.ofLine(line));
+                this.clientes.add(Cliente.ofLine(line));
                 break;
             case Venda.FORMATO_ID:
-                this.addVenda(Venda.ofLine(line));
+                this.vendas.add(Venda.ofLine(line));
                 break;
             default:
                 break;

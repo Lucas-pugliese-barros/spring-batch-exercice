@@ -15,7 +15,7 @@ public class LoteProcessor implements ItemProcessor<Lote, Relatorio> {
 	public Relatorio process(final Lote lote) {
 		final Relatorio relatorio = new Relatorio(lote);
 
-		logger.info("Converting (" + lote + ") into (" + relatorio + ")");
+		logger.info("Converting (" + lote.getNomeDoArquivo() + ") into (" + relatorio + ")");
 
 		return relatorio;
 	}

@@ -3,8 +3,8 @@ package com.barros.batch.config;
 import com.barros.batch.model.Lote;
 import com.barros.batch.model.Relatorio;
 import com.barros.batch.processor.LoteProcessor;
-import com.barros.batch.reader.FileReader;
-import com.barros.batch.writer.ConsoleItemWriter;
+import com.barros.batch.reader.LoteReader;
+import com.barros.batch.writer.ReportWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.Job;
@@ -36,15 +36,15 @@ public class BatchConfiguration {
 	private StepBuilderFactory stepBuilderFactory;
 
 	@Autowired
-	public BatchConfiguration(JobBuilderFactory jobBuilderFactory, StepBuilderFactory stepBuilderFactory) {
+	public BatchConfiguration(JobBuilderFactory jobBuilderFactory,
+							  StepBuilderFactory stepBuilderFactory) {
 		this.jobBuilderFactory = jobBuilderFactory;
 		this.stepBuilderFactory = stepBuilderFactory;
 	}
 
 	@Bean
 	public ItemReader<Lote> reader()  {
-		logger.info("Reading Folder: {0}", inputFolder);
-		return new FileReader(inputFolder);
+		return new LoteReader(inputFolder);
 	}
 
 	@Bean
@@ -54,8 +54,7 @@ public class BatchConfiguration {
 
 	@Bean
 	public ItemWriter<Relatorio> itemWriter() {
-		logger.info("Writing Folder: {0}", outputFolder);
-		return new ConsoleItemWriter();
+		return new ReportWriter(outputFolder);
 	}
 
 	@Bean

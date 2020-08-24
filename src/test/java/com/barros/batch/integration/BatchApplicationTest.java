@@ -1,10 +1,8 @@
 package com.barros.batch.integration;
 
 import com.barros.batch.config.BatchConfiguration;
-import com.barros.batch.reader.FileReader;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.ConfigFileApplicationContextInitializer;
 import org.springframework.boot.test.context.SpringBootTest;
