@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Line {
-    private static final int SECOND_ITEM_INDEX = 1;
 
     private String value;
     private Divisor divisor;
@@ -16,10 +15,6 @@ public class Line {
     public Line(@NonNull String value, Divisor divisor) {
         this.value = value;
         this.divisor = divisor;
-    }
-
-    public String getValue() {
-        return value;
     }
 
     public String getFormatoId() {
@@ -39,12 +34,4 @@ public class Line {
 
         return Arrays.asList(datas);
     }
-
-    public List<String> getDatasWithOutFormatoId() {
-        String[] datas = value.split(divisor.getValue());
-
-        return Arrays.asList(datas)
-                .subList(SECOND_ITEM_INDEX, datas.length);
-    }
-
 }

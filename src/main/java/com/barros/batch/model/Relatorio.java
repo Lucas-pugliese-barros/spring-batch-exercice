@@ -22,12 +22,20 @@ public class Relatorio {
         return lote;
     }
 
+    public String getNomeDoLote() {
+        return lote.getNomeDoArquivo();
+    }
+
+    public boolean isLoteValid() {
+        return lote.isValid();
+    }
+
     public int getQuantidadeDeClientes() {
-        return lote.getClientes().size();
+        return lote.getQuantidadeDeClientes();
     }
 
     public int getQuantidadeDeVendedores() {
-        return lote.getVendedores().size();
+        return lote.getQuantidadeDeVendedores();
     }
 
     public String getIdDaMaiorVenda() {

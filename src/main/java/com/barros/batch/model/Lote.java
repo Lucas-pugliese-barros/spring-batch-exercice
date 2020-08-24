@@ -15,6 +15,8 @@ public class Lote {
     private final List<Cliente> clientes;
     private final List<Venda> vendas;
 
+    private boolean isValid = true;
+
     public Lote() {
         vendedores = new ArrayList<>();
         clientes = new ArrayList<>();
@@ -43,6 +45,18 @@ public class Lote {
             default:
                 break;
         }
+    }
+
+    public void setValid(boolean valid) {
+        isValid = valid;
+    }
+
+    public int getQuantidadeDeClientes() {
+        return clientes.size();
+    }
+
+    public int getQuantidadeDeVendedores() {
+        return vendedores.size();
     }
 
     @Override

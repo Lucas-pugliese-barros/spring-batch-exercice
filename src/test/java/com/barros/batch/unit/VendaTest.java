@@ -1,5 +1,6 @@
 package com.barros.batch.unit;
 
+import com.barros.batch.exception.InvalidFieldsException;
 import com.barros.batch.model.Divisor;
 import com.barros.batch.model.Item;
 import com.barros.batch.model.Venda;
@@ -34,5 +35,11 @@ public class VendaTest {
         assertThat(venda.getNomeDoVendedor()).isEqualTo(nomeDoVendedor);
         assertThat(venda.getItens()).containsAll(itens);
         assertThat(venda.getValorTotal()).isEqualTo(valorTotal);
+    }
+
+    @Test(expected = InvalidFieldsException.class)
+    public void givenInvalidSaleItShouldReturnException() {
+        Line firstLine = new Line("003ç10ç[1-10-100,2-30-2.50,3-40-3.10]Pedro", Divisor.DEFAULT);
+        Venda.ofLine(firstLine);
     }
 }

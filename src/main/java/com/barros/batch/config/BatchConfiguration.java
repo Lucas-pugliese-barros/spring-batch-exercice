@@ -29,14 +29,14 @@ import org.springframework.scheduling.annotation.Scheduled;
 @EnableBatchProcessing
 @EnableScheduling
 public class BatchConfiguration {
-
-	private final Logger logger = LoggerFactory.getLogger(BatchConfiguration.class);
-
 	@Value("${input.folder}")
 	private String inputFolder;
 
 	@Value("${output.folder}")
 	private String outputFolder;
+
+	@Value("${invalid.folder}")
+	private String invalidFolder;
 
 	private JobBuilderFactory jobBuilderFactory;
 	private StepBuilderFactory stepBuilderFactory;
@@ -72,7 +72,7 @@ public class BatchConfiguration {
 
 	@Bean
 	public ItemWriter<Relatorio> itemWriter() {
-		return new ReportWriter(outputFolder);
+		return new ReportWriter(inputFolder, outputFolder, invalidFolder);
 	}
 
 	@Bean

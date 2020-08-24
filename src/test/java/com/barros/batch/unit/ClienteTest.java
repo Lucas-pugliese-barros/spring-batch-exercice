@@ -1,5 +1,6 @@
 package com.barros.batch.unit;
 
+import com.barros.batch.exception.InvalidFieldsException;
 import com.barros.batch.model.Cliente;
 import com.barros.batch.model.Divisor;
 import com.barros.batch.reader.Line;
@@ -22,5 +23,11 @@ public class ClienteTest {
         assertThat(client.getCnpj()).isEqualTo(cnpj);
         assertThat(client.getNome()).isEqualTo(name);
         assertThat(client.getAreaDeNegocio()).isEqualTo(businessArea);
+    }
+
+    @Test(expected = InvalidFieldsException.class)
+    public void givenInvalidLineOfClientItShouldReturnException() {
+        Line line = new Line("002ç2345675433444345çEduardo PereiraRural", Divisor.DEFAULT);
+        Cliente.ofLine(line);
     }
 }

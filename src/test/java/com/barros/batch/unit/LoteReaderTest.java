@@ -1,23 +1,17 @@
 package com.barros.batch.unit;
 
-import com.barros.batch.config.BatchConfiguration;
 import com.barros.batch.model.*;
 import com.barros.batch.reader.LoteReader;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.test.context.ConfigFileApplicationContextInitializer;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.util.ResourceUtils;
 
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,9 +21,23 @@ public class LoteReaderTest extends Unit {
 
     private LoteReader loteReader;
 
+    private final String inputFileName = "/lote_um.dat";
+
     @Before
-    public void beforeTheTest() {
+    public void beforeTheTest() throws IOException {
+        String scenariosFile = scenariosFolder + inputFileName;
+        String inputFile = inputFolder + inputFileName;
+
+        Files.copy(Paths.get(scenariosFile), Paths.get(inputFile), StandardCopyOption.REPLACE_EXISTING);
+
         loteReader = new LoteReader(inputFolder);
+    }
+
+    @After
+    public void afterTheTest() {
+
+        File file = new File(inputFolder + inputFileName);
+        file.deleteOnExit();
     }
 
     @Test

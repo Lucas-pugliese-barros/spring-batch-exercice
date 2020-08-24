@@ -1,5 +1,6 @@
 package com.barros.batch.unit;
 
+import com.barros.batch.exception.InvalidFieldsException;
 import com.barros.batch.model.Item;
 import org.junit.Test;
 
@@ -24,5 +25,17 @@ public class ItemTest {
         List<Item> itens = Item.ofItensArray(arrayOfStrings);
 
         assertThat(itens).containsAll(itensExpected);
+    }
+
+    @Test(expected = InvalidFieldsException.class)
+    public void givenInvalidLineWithOutBracketsItShouldReturnException() {
+        String arrayOfStrings = "[1-10-100,2-30-2.50,3-40-3.10";
+        Item.ofItensArray(arrayOfStrings);
+    }
+
+    @Test(expected = InvalidFieldsException.class)
+    public void givenInvalidLineOfItemsItShouldReturnException() {
+        String arrayOfStrings = "[1-10-100,2-30-2.50,3-40]";
+        Item.ofItensArray(arrayOfStrings);
     }
 }

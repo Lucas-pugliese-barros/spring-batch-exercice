@@ -12,11 +12,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 @ContextConfiguration(initializers = ConfigFileApplicationContextInitializer.class, classes = {BatchConfiguration.class})
 @ActiveProfiles("test")
 public class Unit {
+    @Value("${scenarios.folder}")
+    protected String scenariosFolder;
 
     @Value("${input.folder}")
     protected String inputFolder;
-
-    @Value("${output.folder}")
-    protected String outputFolder;
-
 }

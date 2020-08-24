@@ -1,5 +1,6 @@
 package com.barros.batch.reader;
 
+import com.barros.batch.exception.InvalidFieldsException;
 import com.barros.batch.model.Divisor;
 import com.barros.batch.model.Lote;
 import org.apache.logging.log4j.util.Strings;
@@ -46,8 +47,8 @@ public class LoteReader implements ItemReader<Lote> {
     }
 
     private Lote convertFileToLote(File file) {
+        Lote lote = new Lote(file.getName().replace(FILE_EXTENSION, Strings.EMPTY));
         try (Scanner scanner = new Scanner(file)) {
-            Lote lote = new Lote(file.getName().replace(FILE_EXTENSION, Strings.EMPTY));
             while (scanner.hasNextLine()) {
                 Line line = new Line(scanner.nextLine(), Divisor.DEFAULT);
                 lote.addDadoByFormato(line);
@@ -57,6 +58,10 @@ public class LoteReader implements ItemReader<Lote> {
         } catch (FileNotFoundException exception) {
             logger.error("Error while reading file ", exception);
             return null;
+        } catch (InvalidFieldsException exception) {
+            logger.error("Error while reading file ", exception);
+            lote.setValid(Boolean.FALSE);
+            return lote;
         }
     }
 
