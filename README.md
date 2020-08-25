@@ -1,12 +1,12 @@
 
 ## Project
 
-Sistema de análise de dados, onde o batch vai ler os arquivos .dat, processa-los e posteriormente enviar o mesmo para uma das seguintes pastas:
+Sistema de análise de dados, onde o batch vai ler os arquivos .dat, processá-los e posteriormente enviar para uma das seguintes pastas:
 
-* **DONE** onde ficaram os arquivos que ja foram processados devidamente;
-* **INPUT ou DATA/IN** onde ficaram os arquivos que devem ser processados;
-* **INVALID** onde ficaram os arquivos invalidos;
-* **OUTPUT ou DATA/OUT** onde ficaram os relatorios dos arquivos processados;
+* **DONE** onde ficarão os arquivos que já foram devidamente processados;
+* **INPUT ou DATA/IN** onde ficarão os arquivos que devem ser processados;
+* **INVALID** onde ficarão os arquivos inválidos;
+* **OUTPUT ou DATA/OUT** onde ficarão os relatórios dos arquivos processados;
 
 Obs: essas pastas devem ser criadas e configuradas no **application.properties**
 
@@ -22,7 +22,7 @@ invalid.folder=/home/lucas.pugliese.barros/NewJob/DBC/agibank-batch/batch/src/ma
 
 ## TESTs
 
-Para rodar os testes executar:
+Para rodar os testes, executar:
 
 ```
 
@@ -31,7 +31,7 @@ CMD: mvn test
 ```
 
 
-Para rodar os testes e necessario alterar as seguintes pastas no **application-test.properties**:
+Para rodar os testes é necessário alterar as seguintes pastas no **application-test.properties**:
 
 ```
 scenarios.folder=/home/lucas.pugliese.barros/NewJob/DBC/agibank-batch/batch/src/test/resources/scenarios
@@ -42,7 +42,7 @@ invalid.folder=/home/lucas.pugliese.barros/NewJob/DBC/agibank-batch/batch/src/te
 
 ```
 
-Obs: a pasta **scenarios.folder** contem os arquivos que seram utilizados para os testes de integracao
+Obs: a pasta **scenarios.folder** contém os arquivos que serão utilizados para os testes de integração
 
 ---
 
