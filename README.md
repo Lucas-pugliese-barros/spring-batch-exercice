@@ -1,11 +1,3 @@
-# Enviroment!!
-
-1. SO: Fedora release 32;
-2. Java version: OPENJDK 11.0.8;
-3. Maven version: 3.6.1 (Red Hat 3.6.1-5);
-4. IDE: IntelliJ IDEA;
-
----
 
 ## Project
 
@@ -30,6 +22,15 @@ invalid.folder=/home/lucas.pugliese.barros/NewJob/DBC/agibank-batch/batch/src/ma
 
 ## TESTs
 
+Para rodar os testes executar:
+
+```
+
+CMD: mvn test
+
+```
+
+
 Para rodar os testes e necessario alterar as seguintes pastas:
 
 ```
@@ -40,3 +41,15 @@ output.folder=/home/lucas.pugliese.barros/NewJob/DBC/agibank-batch/batch/src/tes
 invalid.folder=/home/lucas.pugliese.barros/NewJob/DBC/agibank-batch/batch/src/test/resources/invalid
 
 ```
+
+Obs: a pasta **scenarios.folder** contem os arquivos que seram utilizados para os testes de integracao
+
+---
+
+# Enviroment!!
+
+1. SO: Fedora release 32;
+2. Java version: OPENJDK 11.0.8;
+3. Maven version: 3.6.1 (Red Hat 3.6.1-5);
+4. IDE: IntelliJ IDEA;
+
