@@ -31,7 +31,7 @@ CMD: mvn test
 ```
 
 
-Para rodar os testes e necessario alterar as seguintes pastas:
+Para rodar os testes e necessario alterar as seguintes pastas no **application-test.properties**:
 
 ```
 scenarios.folder=/home/lucas.pugliese.barros/NewJob/DBC/agibank-batch/batch/src/test/resources/scenarios
