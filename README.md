@@ -8,7 +8,7 @@ Sistema de análise de dados, onde o batch vai ler os arquivos .dat, processa-lo
 * **INVALID** onde ficaram os arquivos invalidos;
 * **OUTPUT ou DATA/OUT** onde ficaram os relatorios dos arquivos processados;
 
-Obs: essas pastas podem e devem ser configuradas no **application.properties**
+Obs: essas pastas devem ser criadas e configuradas no **application.properties**
 
 ```
 input.folder=/home/lucas.pugliese.barros/NewJob/DBC/agibank-batch/batch/src/main/resources/input
