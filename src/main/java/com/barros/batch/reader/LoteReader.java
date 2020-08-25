@@ -43,6 +43,7 @@ public class LoteReader implements ItemReader<Lote> {
             return lote;
         }
 
+        listOfFiles = null;
         return null;
     }
 
