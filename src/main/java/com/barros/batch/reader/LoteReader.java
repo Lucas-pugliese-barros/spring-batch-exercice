@@ -36,7 +36,7 @@ public class LoteReader implements ItemReader<Lote> {
         }
 
         if (!listOfFiles.isEmpty()) {
-            logger.info("Reading file: ", listOfFiles.get(FIRST_INDEX));
+            logger.info("Reading file: ");
 
             Lote lote = convertFileToLote(listOfFiles.get(FIRST_INDEX));
             listOfFiles.remove(FIRST_INDEX);

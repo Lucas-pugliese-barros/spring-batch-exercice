@@ -1,25 +1,18 @@
 package com.barros.batch.integration;
 
 import com.barros.batch.config.BatchConfiguration;
-import com.barros.batch.model.Lote;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.ConfigFileApplicationContextInitializer;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
-import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
@@ -44,6 +37,9 @@ public class BatchApplicationTest {
     @Value("${input.folder}")
     private String inputFolder;
 
+    @Value("${done.folder}")
+    private String doneFolder;
+
     @Value("${output.folder}")
     private String outputFolder;
 
@@ -65,11 +61,12 @@ public class BatchApplicationTest {
 
     @Test
     public void validFileShouldHaveAhReportAfterBatchProcess() throws Exception {
-        String scenariosFile = this.scenariosFolder + "/lote_um.dat";
-        String inputFile = this.inputFolder + "/lote_um.dat";
+        String fileName = "lote_um.dat";
+        String scenariosFile = this.scenariosFolder + "/" + fileName;
+        String inputFile = this.inputFolder + "/" + fileName;
 
         String expectedFileNameOutput = "lote_um.done.dat";
-        int expectedToHaveOneOutput = 1;
+        int expectedToHaveOne = 1;
 
         //Given valid file to be processed
         Files.copy(Paths.get(scenariosFile), Paths.get(inputFile), StandardCopyOption.REPLACE_EXISTING);
@@ -78,10 +75,14 @@ public class BatchApplicationTest {
         batchConfiguration.perform();
         
         //Then should exist a report
-        File file = new File(outputFolder);
-        File[] arrayOfFiles = file.listFiles((directory, name) -> name.equals(expectedFileNameOutput));
+        File fileOutputFolder = new File(outputFolder);
+        File[] filesOutputFolder = fileOutputFolder.listFiles((directory, name) -> name.equals(expectedFileNameOutput));
+        assertThat(filesOutputFolder.length).isEqualTo(expectedToHaveOne);
 
-        assertThat(arrayOfFiles.length).isEqualTo(expectedToHaveOneOutput);
+        //Then should move the valid lote to done folder
+        File fileDoneFolder = new File(doneFolder);
+        File[] filesDoneFolder = fileDoneFolder.listFiles((directory, name) -> name.equals(fileName));
+        assertThat(filesDoneFolder.length).isEqualTo(expectedToHaveOne);
     }
 
     @Test
@@ -101,7 +102,6 @@ public class BatchApplicationTest {
         //Then should exist one file inside the invalid folder
         File file = new File(invalidFolder);
         File[] arrayOfFiles = file.listFiles((directory, name) -> name.equals(expectedFileNameOutput));
-
         assertThat(arrayOfFiles.length).isEqualTo(expectedToHaveOneOutput);
     }
 

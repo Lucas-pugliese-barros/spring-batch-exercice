@@ -5,8 +5,6 @@ import com.barros.batch.model.Relatorio;
 import com.barros.batch.processor.LoteProcessor;
 import com.barros.batch.reader.LoteReader;
 import com.barros.batch.writer.ReportWriter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersBuilder;
@@ -31,6 +29,9 @@ import org.springframework.scheduling.annotation.Scheduled;
 public class BatchConfiguration {
 	@Value("${input.folder}")
 	private String inputFolder;
+
+	@Value("${done.folder}")
+	private String doneFolder;
 
 	@Value("${output.folder}")
 	private String outputFolder;
@@ -72,7 +73,7 @@ public class BatchConfiguration {
 
 	@Bean
 	public ItemWriter<Relatorio> itemWriter() {
-		return new ReportWriter(inputFolder, outputFolder, invalidFolder);
+		return new ReportWriter(inputFolder, doneFolder ,outputFolder, invalidFolder);
 	}
 
 	@Bean

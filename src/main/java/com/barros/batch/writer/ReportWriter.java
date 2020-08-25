@@ -18,11 +18,13 @@ public class ReportWriter implements ItemWriter<Relatorio> {
     private final Logger logger = LoggerFactory.getLogger(ReportWriter.class);
 
     private String inputFolder;
+    private String doneFolder;
     private String outputFolder;
     private String invalidFolder;
 
-    public ReportWriter(String inputFolder, String outputFolder, String invalidFolder) {
+    public ReportWriter(String inputFolder, String doneFolder, String outputFolder, String invalidFolder) {
         this.inputFolder = inputFolder;
+        this.doneFolder = doneFolder;
         this.outputFolder = outputFolder;
         this.invalidFolder = invalidFolder;
     }
@@ -49,6 +51,15 @@ public class ReportWriter implements ItemWriter<Relatorio> {
             myWriter.write("O pior vendedor: " + relatorio.getPiorVendedor() + "\n");
         } catch (IOException exception) {
             logger.error("Error while reading file ", exception);
+        }
+
+        try {
+            String loteInputFolder = inputFolder + "/" + relatorio.getNomeDoLote()  + ".dat";
+            String loteDoneFolder = doneFolder + "/" + relatorio.getNomeDoLote()  + ".dat";
+
+            Files.move(Paths.get(loteInputFolder), Paths.get(loteDoneFolder), StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException exception) {
+            logger.error("Error while moving valid file ", exception);
         }
     }
 
