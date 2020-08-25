@@ -54,13 +54,14 @@ public class BatchApplicationTest {
             add("lote_dois_invalido.dat");
         }};
 
+        deleteFilesOfContext(filesToBeDeleted, doneFolder);
         deleteFilesOfContext(filesToBeDeleted, inputFolder);
         deleteFilesOfContext(filesToBeDeleted, invalidFolder);
         deleteFilesOfContext(filesToBeDeleted, outputFolder);
     }
 
     @Test
-    public void validFileShouldHaveAhReportAfterBatchProcess() throws Exception {
+    public void validFileShouldHaveAhReportAfterBatchProcessAndShouldBeMovedToAnotherFolder() throws Exception {
         String fileName = "lote_um.dat";
         String scenariosFile = this.scenariosFolder + "/" + fileName;
         String inputFile = this.inputFolder + "/" + fileName;

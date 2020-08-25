@@ -1,10 +1,17 @@
 package com.barros.batch.unit;
 
+import com.barros.batch.config.BatchConfiguration;
 import com.barros.batch.model.*;
 import com.barros.batch.reader.LoteReader;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.context.ConfigFileApplicationContextInitializer;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,7 +24,16 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LoteReaderTest extends Unit {
+@RunWith(SpringRunner.class)
+@ContextConfiguration(initializers = ConfigFileApplicationContextInitializer.class, classes = {BatchConfiguration.class})
+@ActiveProfiles("test")
+public class LoteReaderTest {
+
+    @Value("${scenarios.folder}")
+    protected String scenariosFolder;
+
+    @Value("${input.folder}")
+    protected String inputFolder;
 
     private LoteReader loteReader;
 

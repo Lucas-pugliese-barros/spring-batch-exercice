@@ -81,9 +81,6 @@
 							<includes>
 								<include>/**Test.java</include>
 							</includes>
-							<excludes>
-								<exclude>**/Unit.java</exclude>
-							</excludes>
 						</configuration>
 					</execution>
 				</executions>
