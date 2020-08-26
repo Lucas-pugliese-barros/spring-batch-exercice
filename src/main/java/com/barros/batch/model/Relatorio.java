@@ -2,12 +2,6 @@ package com.barros.batch.model;
 
 import lombok.*;
 
-import java.math.BigDecimal;
-import java.util.*;
-import java.util.function.Function;
-
-import static java.util.stream.Collectors.*;
-
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode

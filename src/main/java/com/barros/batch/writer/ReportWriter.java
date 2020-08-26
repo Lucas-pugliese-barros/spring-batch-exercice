@@ -1,6 +1,5 @@
 package com.barros.batch.writer;
 
-import com.barros.batch.model.Lote;
 import com.barros.batch.model.Relatorio;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
