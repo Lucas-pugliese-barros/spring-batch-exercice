@@ -1,0 +1,10 @@
+version: '2'
+services:
+  batch:
+    image: lucaspugliese/agibank-batch:1.0.0
+    container_name: agibank-batch
+    volumes:
+      - ./input:/home/input
+      - ./done:/home/done
+      - ./output:/home/output
+      - ./invalid:/home/invalid
