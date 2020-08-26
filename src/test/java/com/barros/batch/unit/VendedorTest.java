@@ -1,7 +1,7 @@
 package com.barros.batch.unit;
 
 import com.barros.batch.exception.InvalidFieldsException;
-import com.barros.batch.model.Divisor;
+import com.barros.batch.reader.Divisor;
 import com.barros.batch.model.Vendedor;
 import com.barros.batch.reader.Line;
 import org.junit.Test;

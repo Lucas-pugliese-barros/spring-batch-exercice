@@ -1,4 +1,4 @@
-package com.barros.batch.model;
+package com.barros.batch.reader;
 
 public enum Divisor {
 

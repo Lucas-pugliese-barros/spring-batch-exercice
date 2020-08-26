@@ -1,6 +1,5 @@
 package com.barros.batch.reader;
 
-import com.barros.batch.model.Divisor;
 import lombok.NonNull;
 import org.apache.logging.log4j.util.Strings;
 

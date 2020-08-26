@@ -1,6 +1,7 @@
 package com.barros.batch.model;
 
 import com.barros.batch.exception.InvalidFieldsException;
+import com.barros.batch.reader.Divisor;
 import com.barros.batch.reader.Line;
 import lombok.*;
 import org.apache.logging.log4j.util.Strings;

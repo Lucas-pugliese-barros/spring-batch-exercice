@@ -1,7 +1,6 @@
 package com.barros.batch.reader;
 
 import com.barros.batch.exception.InvalidFieldsException;
-import com.barros.batch.model.Divisor;
 import com.barros.batch.model.Lote;
 import org.apache.logging.log4j.util.Strings;
 import org.slf4j.Logger;

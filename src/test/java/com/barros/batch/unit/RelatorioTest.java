@@ -2,6 +2,7 @@ package com.barros.batch.unit;
 
 import com.barros.batch.model.*;
 import com.barros.batch.processor.LoteProcessor;
+import com.barros.batch.reader.Divisor;
 import com.barros.batch.reader.Line;
 import org.junit.Before;
 import org.junit.Test;
