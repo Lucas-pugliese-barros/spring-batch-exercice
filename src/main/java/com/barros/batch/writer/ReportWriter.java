@@ -32,30 +32,29 @@ public class ReportWriter implements ItemWriter<Relatorio> {
     @Override
     public void write(List<? extends Relatorio> relatorios) {
         for (Relatorio relatorio : relatorios) {
-
             if (relatorio.isLoteValid()) {
-                logger.info("Writing the report");
+                logger.info("Writing the report and moving lote");
                 writeReportForValidLote(relatorio);
+                moveLoteToDoneFolder(relatorio.getNomeDoLote());
             } else {
-                writeInvalidLote(relatorio.getLote());
-                logger.info("Writing invalid lote");
+                moveLoteToInvalidFolder(relatorio.getNomeDoLote());
+                logger.info("Moving invalid lote");
             }
         }
     }
 
     private void writeReportForValidLote(Relatorio relatorio) {
         try (FileWriter myWriter = new FileWriter(outputFolder + "/" + relatorio.getNomeDoLote() + ".done.dat")) {
-            myWriter.write("Quantidade de clientes no arquivo de entrada: " + relatorio.getQuantidadeDeClientes() + "\n");
-            myWriter.write("Quantidade de vendedores no arquivo de entrada: " + relatorio.getQuantidadeDeVendedores() + "\n");
-            myWriter.write("ID da venda mais cara: " + relatorio.getIdDaMaiorVenda() + "\n");
-            myWriter.write("O pior vendedor: " + relatorio.getPiorVendedor() + "\n");
+            myWriter.write(relatorio.print());
         } catch (IOException exception) {
             logger.error("Error while reading file ", exception);
         }
+    }
 
+    private void moveLoteToDoneFolder(String nomeDoLote) {
         try {
-            String loteInputFolder = inputFolder + "/" + relatorio.getNomeDoLote()  + ".dat";
-            String loteDoneFolder = doneFolder + "/" + relatorio.getNomeDoLote()  + ".dat";
+            String loteInputFolder = inputFolder + "/" + nomeDoLote  + ".dat";
+            String loteDoneFolder = doneFolder + "/" + nomeDoLote  + ".dat";
 
             Files.move(Paths.get(loteInputFolder), Paths.get(loteDoneFolder), StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException exception) {
@@ -63,11 +62,11 @@ public class ReportWriter implements ItemWriter<Relatorio> {
         }
     }
 
-    private void writeInvalidLote(Lote lote) {
-        String loteInputFolder = inputFolder + "/" + lote.getNomeDoArquivo()  + ".dat";
-        String loteInvalidFolder = invalidFolder + "/" + lote.getNomeDoArquivo()  + ".dat";
-
+    private void moveLoteToInvalidFolder(String nomeDoLote) {
         try {
+            String loteInputFolder = inputFolder + "/" + nomeDoLote  + ".dat";
+            String loteInvalidFolder = invalidFolder + "/" + nomeDoLote  + ".dat";
+
             Files.move(Paths.get(loteInputFolder), Paths.get(loteInvalidFolder), StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException exception) {
             logger.error("Error while moving invalid file ", exception);

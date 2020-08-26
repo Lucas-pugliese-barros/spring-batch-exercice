@@ -4,8 +4,11 @@ import com.barros.batch.reader.Line;
 import lombok.Getter;
 import lombok.NonNull;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.math.BigDecimal;
+import java.util.*;
+import java.util.function.Function;
+
+import static java.util.stream.Collectors.groupingBy;
 
 @Getter
 public class Lote {
@@ -57,6 +60,44 @@ public class Lote {
 
     public int getQuantidadeDeVendedores() {
         return vendedores.size();
+    }
+
+    public String getIdDaMaiorVenda() {
+        Map<String, BigDecimal> precoTotalDaVendaById = precoTotalDaVendaBy(Venda::getId);
+
+        Optional<Map.Entry<String, BigDecimal>> melhorVendaDoLote = precoTotalDaVendaById.entrySet()
+                .stream().max(Map.Entry.comparingByValue());
+
+        return melhorVendaDoLote.isPresent() ? melhorVendaDoLote.get().getKey() : "";
+    }
+
+    public String getPiorVendedor() {
+        Map<String, BigDecimal> precoTotalDaVendaByVendedor = precoTotalDaVendaBy(Venda::getNomeDoVendedor);
+
+        Optional<Map.Entry<String, BigDecimal>> piorVendaDoLote = precoTotalDaVendaByVendedor.entrySet()
+                .stream().min(Map.Entry.comparingByValue());
+
+        return piorVendaDoLote.isPresent() ? piorVendaDoLote.get().getKey() : "";
+    }
+
+    private Map<String, BigDecimal> precoTotalDaVendaBy (Function<Venda, String> groupBy) {
+        Map<String, List<Venda>> vendasDoLoteById = groupVendasBy(groupBy);
+        Map<String, BigDecimal> precoTotalDaVendaById = new HashMap<>();
+
+        vendasDoLoteById.forEach((idVenda, vendas) -> {
+            BigDecimal valorTotalDaVenda = vendas.stream()
+                    .map(Venda::getValorTotal)
+                    .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+            precoTotalDaVendaById.put(idVenda, valorTotalDaVenda);
+        });
+
+        return precoTotalDaVendaById;
+    }
+
+    private Map<String, List<Venda>> groupVendasBy(Function<Venda, String> groupBy) {
+        return vendas.stream()
+                .collect(groupingBy(groupBy));
     }
 
     @Override
