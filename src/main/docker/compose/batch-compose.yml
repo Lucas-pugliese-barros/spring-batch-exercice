@@ -4,7 +4,7 @@ services:
     image: lucaspugliese/agibank-batch:1.0.0
     container_name: agibank-batch
     volumes:
-      - ./input:/home/input
-      - ./done:/home/done
-      - ./output:/home/output
-      - ./invalid:/home/invalid
+      - $HOME/data/input:/root/data/input
+      - $HOME/data/done:/root/data/done
+      - $HOME/data/output:/root/data/output
+      - $HOME/data/invalid:/root/data/invalid

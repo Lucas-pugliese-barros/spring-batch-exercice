@@ -37,7 +37,7 @@ public class LoteReaderTest {
 
     private LoteReader loteReader;
 
-    private final String inputFileName = "/lote_um.dat";
+    private final String inputFileName = "/file_one.dat";
 
     @Before
     public void beforeTheTest() throws IOException {
@@ -51,14 +51,13 @@ public class LoteReaderTest {
 
     @After
     public void afterTheTest() {
-
         File file = new File(inputFolder + inputFileName);
         file.deleteOnExit();
     }
 
     @Test
     public void givenValidInputFolderTheReaderShouldReturnValidVendedores() {
-        String fileName = "lote_um";
+        String fileName = "file_one";
 
         List<Vendedor> vendedoresEsperados = new ArrayList<>() {{
             add(new Vendedor("1234567891234", "Pedro", new BigDecimal("50000")));
@@ -73,7 +72,7 @@ public class LoteReaderTest {
 
     @Test
     public void givenValidInputFolderTheReaderShouldReturnValidClientes() {
-        String fileName = "lote_um";
+        String fileName = "file_one";
 
         List<Cliente> clientesEsperados = new ArrayList<>() {{
             add(new Cliente("2345675434544345", "Jose da Silva", "Rural"));
@@ -88,7 +87,7 @@ public class LoteReaderTest {
 
     @Test
     public void givenValidInputFolderTheReaderShouldReturnValidVenda() {
-        String fileName = "lote_um";
+        String fileName = "file_one";
 
         List<Item> itensOfVendaPedro = new ArrayList<>() {{
             add(new Item("1", 10, new BigDecimal("100")));
