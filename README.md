@@ -96,7 +96,8 @@ Para rodar somente os testes você precisa entrar na pasta do projeto e executar
 4. [Spring Batch](https://spring.io/projects/spring-batch);
 5. [Spring Boot](https://spring.io/projects/spring-boot);
 6. [Cucumber](https://cucumber.io/);
-7. [Assert J](https://joel-costigliola.github.io/assertj/);
-8. IDE: IntelliJ IDEA;
+7. [Lombok](https://projectlombok.org/)
+8. [Assert J](https://joel-costigliola.github.io/assertj/);
+9. IDE: IntelliJ IDEA;
 
 
