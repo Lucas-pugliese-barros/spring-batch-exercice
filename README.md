@@ -4,9 +4,9 @@
 Projeto desenvolvido com o proposito de ler arquivos .dat, processá-los, gerar relatorio e posteriormente enviar os mesmos para suas devidas pastas a depender do fluxo. As pastas envolvidas nesse processo:
 
 * **DONE** onde ficarão os arquivos que já foram devidamente processados;
-* **INPUT ou DATA/IN** onde ficarão os arquivos que devem ser processados;
+* **INPUT** onde ficarão os arquivos que devem ser processados;
 * **INVALID** onde ficarão os arquivos inválidos;
-* **OUTPUT ou DATA/OUT** onde ficarão os relatórios dos arquivos processados;
+* **OUTPUT** onde ficarão os relatórios dos arquivos processados;
 
 Obs: Para rodar o projeto pela **IDE** ou pelo **Docker** essas pastas devem ser criadas na sua **HOME** com a seguinte estrutura:
 
