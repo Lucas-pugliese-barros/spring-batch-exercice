@@ -1,7 +1,7 @@
 
-# Aplicacao
+# Aplicação
 
-Projeto desenvolvido com o proposito de ler arquivos .dat, processá-los, gerar relatorio e posteriormente enviar os mesmos para suas devidas pastas a depender do fluxo. As pastas envolvidas nesse processo:
+Projeto desenvolvido com o propósito de ler arquivos .dat, processá-los, gerar relatório e posteriormente enviar os mesmos para suas devidas pastas a depender do fluxo. As pastas envolvidas nesse processo:
 
 * **DONE** onde ficarão os arquivos que já foram devidamente processados;
 * **INPUT** onde ficarão os arquivos que devem ser processados;
@@ -20,7 +20,7 @@ Obs: Para rodar o projeto pela **IDE** ou pelo **Docker** essas pastas devem ser
 
 ## Exemplo de arquivos .dat
 
-**Valido**
+**Válido**
 ```
 001ç1234567891234çPedroç50000
 001ç3245678865434çPauloç40000.99
@@ -31,7 +31,7 @@ Obs: Para rodar o projeto pela **IDE** ou pelo **Docker** essas pastas devem ser
 
 ```
 
-**Invalido**
+**Inválido**
 ```
 001ç1234567891234çPedroç50000
 001ç3245678865434çPauloç40000.99
@@ -42,7 +42,7 @@ Obs: Para rodar o projeto pela **IDE** ou pelo **Docker** essas pastas devem ser
 
 ```
 
-## Exemplo de relatorio
+## Exemplo de relatório
 ```
 Quantidade de clientes no arquivo de entrada: 2
 Quantidade de vendedores no arquivo de entrada: 2
@@ -57,7 +57,7 @@ O pior vendedor: Paulo
 ## Como executar?
 
 
-**Garanta que voce tem:**
+**Garanta que você tem:**
 1. Git;
 2. Java 11;
 3. Docker e docker-compose;
@@ -82,22 +82,9 @@ Obs: O arquivo **batch-compose** se encontra na seguinte pasta do projeto: `src/
 
 ---
 
-## TESTs / Docker
+## TESTs
 
-Para rodar os testes voce precisa entrar na pasta do projeto e executar:
-
-```
-
-CMD: mvn clean test
-
-```
-
-Para rodar os testes e criar imagem docker voce precisa entrar na pasta do projeto e executar:
-```
-
-CMD: mvn clean package
-
-```
+Para rodar somente os testes você precisa entrar na pasta do projeto e executar:`mvn clean test`
 
 ---
 
