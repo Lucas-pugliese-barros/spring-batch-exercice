@@ -64,7 +64,7 @@ O pior vendedor: Paulo
 
 **Depois:**
 
-1. Obtenha o projeto com o git: git clone https://github.com/Lucas-pugliese-barros/spring-batch-exercice.git
+1. Obtenha o projeto com o git: git clone `https://github.com/Lucas-pugliese-barros/spring-batch-exercice.git`
 2. Crie as seguintes pastas na sua **HOME**:
 
 ```
